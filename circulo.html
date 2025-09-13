@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Círculo Escapista</title>
+  <style>
+    /* Estilos generales */
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      background-color: #f0f0f0;
+      position: relative;
+      font-family: sans-serif;
+    }
+
+    /* El círculo */
+    .circle {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      background-color: #4CAF50;
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Círculo -->
+  <div class="circle" id="circle"></div>
+
+  <script>
+    const circle = document.getElementById('circle');
+    const circleSize = 80;
+
+    // Función para obtener una posición aleatoria dentro del viewport
+    function getRandomPosition() {
+      const maxX = window.innerWidth - circleSize;
+      const maxY = window.innerHeight - circleSize;
+      const x = Math.floor(Math.random() * maxX);
+      const y = Math.floor(Math.random() * maxY);
+      return { x, y };
+    }
+
+    // Función para mover el círculo a una posición (x, y)
+    function moveCircle(x, y) {
+      circle.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    // Inicializa el círculo en una posición aleatoria
+    let { x, y } = getRandomPosition();
+    moveCircle(x, y);
+
+    // Detecta si el mouse se acerca al círculo
+    document.addEventListener('mousemove', (e) => {
+      const rect = circle.getBoundingClientRect();
+      const distance = Math.hypot(e.clientX - (rect.left + circleSize / 2), e.clientY - (rect.top + circleSize / 2));
+
+      // Si el mouse está a menos de 100px del centro del círculo, se escapa
+      if (distance < 100) {
+        const newPos = getRandomPosition();
+        moveCircle(newPos.x, newPos.y);
+      }
+    });
+
+    // Opcional: Evita que el círculo se escape fuera del área si se redimensiona la ventana
+    window.addEventListener('resize', () => {
+      const newPos = getRandomPosition();
+      moveCircle(newPos.x, newPos.y);
+    });
+  </script>
+
+</body>
+</html>
