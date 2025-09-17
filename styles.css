@@ -1,0 +1,35 @@
+/* Selector de etiqueta */
+
+h1 {
+  color: blue;
+  font-size: 36px;
+  font-family: Arial, sans-serif;
+}
+
+/* Selector de clase */
+.titulo {
+  color: green;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Selector de ID */
+#parrafo1 {
+  color: red;
+  font-size: 18px;
+  font-style: italic;
+}
+
+/* Selector descendiente */
+div span {
+  color: purple;
+  font-size: 20px;
+  text-decoration: unset;
+}
+
+/* Selector de grupo */
+h1, p {
+  background-color: #f0f0f0;
+  padding: 5px;
+  margin: 8px;
+}
